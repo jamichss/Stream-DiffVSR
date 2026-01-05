@@ -17,7 +17,7 @@ Diffusion-based video super-resolution (VSR) methods achieve strong perceptual q
 ## Usage
 
 ### Environment 
-The code is based on Python 3.9, CUDA 11, and [diffusers](https://github.com/huggingface/diffusers).
+The code is based on Python 3.9, CUDA 11, and [diffusers](https://github.com/huggingface/diffusers), and our development and testing are primarily conducted on Ubuntu 24.04 LTS.
 
 ### Conda setup
 ```
