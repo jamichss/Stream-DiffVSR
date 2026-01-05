@@ -17,7 +17,7 @@ Diffusion-based video super-resolution (VSR) methods achieve strong perceptual q
 ## Usage
 
 ### Environment 
-The code is based on Python 3.8, CUDA 11, and [diffusers](https://github.com/huggingface/diffusers).
+The code is based on Python 3.9, CUDA 11, and [diffusers](https://github.com/huggingface/diffusers).
 
 ### Conda setup
 ```
@@ -49,7 +49,7 @@ YOUR_INPUT_PATH/
 │   ├── frame_0002.png
 │   └── ...
 ```
-For additional acceleration using NVIDIA TensorRT, please execute the following command. Please note that utilizing TensorRT may introduce a slight degradation in the output quality while providing significant performance gains. 
+For additional acceleration using NVIDIA TensorRT, please execute the following command. Please note that utilizing TensorRT may introduce a slight degradation in the output quality while providing significant performance gains. Parameters image_height and image_width are required when using tensorRT; otherwise, they are not needed.
 
 ```
 python inference.py \
@@ -58,11 +58,11 @@ python inference.py \
     --in_path 'YOUR_INPUT_PATH' \
     --num_inference_steps 4 \
     --enable_tensorrt \
-    --image_height <YOUR_TARGET_HEIGHT> \
-    --image_width <YOUR_TARGET_WIDTH>
+    --image_height <YOUR_OUTPUT_HEIGHT> \
+    --image_width <YOUR_OUTPUT_WIDTH>
 ```
 
-When executing the TensorRT command for the first time with a new input resolution, you may observe that the process takes an extended period to build the dedicated TensorRT engine. We kindly ask for your patience. Please note that this engine compilation is a one-time setup step for that specific resolution, essential for enabling subsequent accelerated inference at the same setting.
+When executing the TensorRT command for the first time with a new output resolution, you may observe that the process takes an extended period to build the dedicated TensorRT engine. We kindly ask for your patience. Please note that this engine compilation is a one-time setup step for that specific resolution, essential for enabling subsequent accelerated inference at the same setting.
 
 ## Citation
 
