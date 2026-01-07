@@ -66,6 +66,40 @@ python inference.py \
 
 When executing the TensorRT command for the first time with a new output resolution, you may observe that the process takes an extended period to build the dedicated TensorRT engine. We kindly ask for your patience. Please note that this engine compilation is a one-time setup step for that specific resolution, essential for enabling subsequent accelerated inference at the same setting.
 
+## Gradio UI (Video Upscaling)
+
+The project includes a simple Gradio app which accepts a source video, extracts frames, runs Stream-DiffVSR on the frames, rebuilds a video at the original FPS, and muxes the original audio back in. A preview and download button are provided for the output.
+
+### Requirements
+- CUDA-capable GPU recommended
+- `ffmpeg` available on the host
+
+### Run locally
+```
+python app.py
+```
+Then open `http://localhost:8000` in your browser.
+
+### Environment variables
+- `STREAM_DIFFVSR_MODEL_ID`: override the Hugging Face model ID (default `Jamichsu/Stream-DiffVSR`)
+- `STREAM_DIFFVSR_TMP_DIR`: temp workspace for extracted frames (default `.gradio_tmp`)
+- `STREAM_DIFFVSR_OUTPUT_DIR`: output folder for final videos (default `outputs`)
+- `PORT`: server port (default `8000`)
+
+## Docker
+
+Build the image:
+```
+docker build -t stream-diffvsr-gradio .
+```
+
+Run with NVIDIA GPU access:
+```
+docker run --gpus all -p 8000:8000 stream-diffvsr-gradio
+```
+
+Then open `http://localhost:8000` in your browser.
+
 ## Citation
 
 If you find this work useful, please consider citing:
