@@ -26,7 +26,7 @@ cd Stream-DiffVSR
 conda env create -f requirements.yml
 conda activate stream-diffvsr
 ```
-Users with RTX 6000 Pro or RTX 50-series GPUs may need to update their environment by following the instructions below. For more details, please refer to [Issue #10](https://github.com/jamichss/Stream-DiffVSR/issues/10).
+Users with RTX 6000 Pro or RTX 50-series GPUs may need to update their environment by following the instructions below. For more details, please refer to [Issue #10](https://github.com/jamichss/Stream-DiffVSR/issues/10). We thank [medienbueroleipzig](https://github.com/medienbueroleipzig), [tpc2233](https://github.com/tpc2233) and [b00nwin](https://github.com/b00nwin) for testing and providing the detailed instructions!
 ```
 ## Conda setup for RTX 6000 Pro / RTX 50-Series GPUs
 git clone https://github.com/jamichss/Stream-DiffVSR.git
