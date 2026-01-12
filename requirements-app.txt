@@ -1,0 +1,9 @@
+accelerate==0.23.0
+diffusers==0.27.2
+gradio==5.5.0
+huggingface-hub==0.25.1
+matplotlib==3.9.2
+numpy==1.26.4
+pillow==10.4.0
+safetensors==0.4.5
+transformers==4.37.2

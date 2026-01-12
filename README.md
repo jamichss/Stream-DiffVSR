@@ -19,13 +19,14 @@ Diffusion-based video super-resolution (VSR) methods achieve strong perceptual q
 ### Environment 
 The code is based on Python 3.9, CUDA 11, and [diffusers](https://github.com/huggingface/diffusers), and our development and testing are primarily conducted on Ubuntu 24.04 LTS.
 
-### Conda setup
+### Conda setup (base)
 ```
 git clone https://github.com/jamichss/Stream-DiffVSR.git
 cd Stream-DiffVSR
 conda env create -f requirements.yml
 conda activate stream-diffvsr
 ```
+
 Users with RTX 6000 Pro or RTX 50-series GPUs may need to update their environment by following the instructions below. For more details, please refer to [Issue #10](https://github.com/jamichss/Stream-DiffVSR/issues/10). We thank [medienbueroleipzig](https://github.com/medienbueroleipzig), [tpc2233](https://github.com/tpc2233) and [b00nwin](https://github.com/b00nwin) for testing and providing the detailed instructions!
 ```
 ## Conda setup for RTX 6000 Pro / RTX 50-Series GPUs
@@ -40,6 +41,18 @@ pip install -r requirements-cu12.txt
 pip install --upgrade transformers peft diffusers accelerate
 pip install xformers==0.0.32.post2
 ```
+
+### CLI inference (frames)
+Use the base conda environment above and run `inference.py` as shown in the next section.
+
+### Gradio UI (local)
+This UI workflow and setup were kindly contributed by [mbetrifork](https://github.com/mbetrifork). Many thanks for the effort in making the tool more accessible.
+Use the base conda environment above, then install the UI requirements:
+```
+pip install -r requirements-app.txt
+```
+This installs the Gradio UI dependencies and pins a compatible `huggingface-hub` for the UI path. It is not required for CLI inference.
+
 ### Pretrained models
 Pretrained models are available [here](https://huggingface.co/Jamichsu/Stream-DiffVSR). You don't need to download them explicitly as they are fetched with inference code.
 ### Inference
@@ -79,6 +92,53 @@ python inference.py \
 ```
 
 When executing the TensorRT command for the first time with a new output resolution, you may observe that the process takes an extended period to build the dedicated TensorRT engine. We kindly ask for your patience. Please note that this engine compilation is a one-time setup step for that specific resolution, essential for enabling subsequent accelerated inference at the same setting.
+
+## Gradio UI (Video Upscaling)
+
+The project includes a simple Gradio app which accepts a source video, extracts frames, runs Stream-DiffVSR on the frames, rebuilds a video at the original FPS, and muxes the original audio back in. A preview and download button are provided for the output.
+
+### Requirements
+- CUDA-capable GPU recommended
+- `ffmpeg` available on the host
+
+### Run locally
+```
+python app.py
+```
+Then open `http://localhost:8000` in your browser.
+
+### Install paths summary
+- CLI inference: `requirements.yml` (conda base).
+- Gradio UI: `requirements.yml` + `requirements-app.txt`.
+- Docker: `Dockerfile` + `requirements-app.txt` (installs CUDA PyTorch wheels and UI deps).
+
+### Environment variables
+- `STREAM_DIFFVSR_MODEL_ID`: override the Hugging Face model ID (default `Jamichsu/Stream-DiffVSR`)
+- `STREAM_DIFFVSR_TMP_DIR`: temp workspace for extracted frames (default `.gradio_tmp`)
+- `STREAM_DIFFVSR_OUTPUT_DIR`: output folder for final videos (default `outputs`)
+- `PORT`: server port (default `8000`)
+
+## Docker
+
+Build the image:
+```
+docker build -t stream-diffvsr-gradio .
+```
+
+Run with NVIDIA GPU access:
+```
+docker run --gpus all -p 8000:8000 stream-diffvsr-gradio
+```
+
+Then open `http://localhost:8000` in your browser.
+
+## Diagnostics
+
+If you need to report a dependency issue, you can capture a full environment snapshot (optional):
+```
+pip list --format=freeze > requirements-full.txt
+```
+This file is not used for installation, only diagnostics.
 
 ## Citation
 
