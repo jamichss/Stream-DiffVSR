@@ -19,13 +19,23 @@ Diffusion-based video super-resolution (VSR) methods achieve strong perceptual q
 ### Environment 
 The code is based on Python 3.9, CUDA 11, and [diffusers](https://github.com/huggingface/diffusers), and our development and testing are primarily conducted on Ubuntu 24.04 LTS.
 
-### Conda setup
+### Conda setup (base)
 ```
 git clone https://github.com/jamichss/Stream-DiffVSR.git
 cd Stream-DiffVSR
 conda env create -f requirements.yml
 conda activate stream-diffvsr
 ```
+
+### CLI inference (frames)
+Use the base conda environment above and run `inference.py` as shown in the next section.
+
+### Gradio UI (local)
+Use the base conda environment above, then install the UI requirements:
+```
+pip install -r requirements-app.txt
+```
+This installs the Gradio UI dependencies and pins a compatible `huggingface-hub` for the UI path. It is not required for CLI inference.
 ### Pretrained models
 Pretrained models are available [here](https://huggingface.co/Jamichsu/Stream-DiffVSR). You don't need to download them explicitly as they are fetched with inference code.
 ### Inference
@@ -80,6 +90,11 @@ python app.py
 ```
 Then open `http://localhost:8000` in your browser.
 
+### Install paths summary
+- CLI inference: `requirements.yml` (conda base).
+- Gradio UI: `requirements.yml` + `requirements-app.txt`.
+- Docker: `Dockerfile` + `requirements-app.txt` (installs CUDA PyTorch wheels and UI deps).
+
 ### Environment variables
 - `STREAM_DIFFVSR_MODEL_ID`: override the Hugging Face model ID (default `Jamichsu/Stream-DiffVSR`)
 - `STREAM_DIFFVSR_TMP_DIR`: temp workspace for extracted frames (default `.gradio_tmp`)
@@ -99,6 +114,14 @@ docker run --gpus all -p 8000:8000 stream-diffvsr-gradio
 ```
 
 Then open `http://localhost:8000` in your browser.
+
+## Diagnostics
+
+If you need to report a dependency issue, you can capture a full environment snapshot (optional):
+```
+pip list --format=freeze > requirements-full.txt
+```
+This file is not used for installation, only diagnostics.
 
 ## Citation
 
