@@ -46,7 +46,6 @@ pip install xformers==0.0.32.post2
 Use the base conda environment above and run `inference.py` as shown in the next section.
 
 ### Gradio UI (local)
-This UI workflow and setup were kindly contributed by [mbetrifork](https://github.com/mbetrifork). Many thanks for the effort in making the tool more accessible.
 Use the base conda environment above, then install the UI requirements:
 ```
 pip install -r requirements-app.txt
@@ -95,7 +94,7 @@ When executing the TensorRT command for the first time with a new output resolut
 
 ## Gradio UI (Video Upscaling)
 
-The project includes a simple Gradio app which accepts a source video, extracts frames, runs Stream-DiffVSR on the frames, rebuilds a video at the original FPS, and muxes the original audio back in. A preview and download button are provided for the output.
+The project includes a simple Gradio app which accepts a source video, extracts frames, runs Stream-DiffVSR on the frames, rebuilds a video at the original FPS, and muxes the original audio back in. A preview and download button are provided for the output. This UI workflow and setup were kindly contributed by [mbetrifork](https://github.com/mbetrifork). Many thanks for the effort in making the tool more accessible.
 
 ### Requirements
 - CUDA-capable GPU recommended
