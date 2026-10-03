@@ -110,7 +110,7 @@ The training pipeline consists of the following three stages, which should be pe
 
 **Step 3. Train the ARTG with the UNet and TPM frozen**
 
-```bash
+```
 # Step 1. Train the UNet with rollout distillation
 bash train/train_4steps_unet_rollout.sh
 
@@ -119,6 +119,7 @@ bash train/train_temporal_autoencoder.sh
 
 # Step 3. Train the ARTG with the UNet and TPM frozen
 bash train/train_artg.sh
+```
 
 ## Gradio UI (Video Upscaling)
 
