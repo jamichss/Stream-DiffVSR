@@ -1,0 +1,34 @@
+dataset:
+  train:
+    dataroot_gt: /project/jamichsu/REDS/train/train_sharp/ # path to GT (e.g., 000, 001, 002 ... )
+    # dataroot_lq: /project/jamichsu/REDS/train/train_sharp_bicubic/X4 # path to bicubic (e.g., 000, 001, 002 ... )
+    dataroot_lq: /project/jamichsu/REDS/train/train_sharp_mix_degradation/X4
+    meta_info_file: ./dataset/REDS_train_metadata.txt
+    dataroot_flow:
+    io_backend:
+      type: disk
+    num_frame: 3
+    val_partition: 'REDS4'
+    test_mode: False
+    interval_list: [1]
+    random_reverse: True
+    gt_size: 512
+    use_hflip: True
+    use_rot: False
+    scale: 4
+    remove_partition: True
+  test:
+    dataroot_gt: /project/jamichsu/REDS/test/gt/
+    dataroot_lq: /project/jamichsu/REDS/test/bicubic/
+    meta_info_file: /project/jamichsu/REDS/test/metadata.txt
+    io_backend:
+      type: disk
+    num_frame: 3
+    val_partition: 'REDS4'
+    test_mode: True
+    interval_list: [1]
+    random_reverse: False
+    gt_size: 256
+    use_hflip: False
+    use_rot: False
+    scale: 4

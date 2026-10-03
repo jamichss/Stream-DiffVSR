@@ -1,0 +1,4 @@
+/project/jamichsu/REDS/train/train_sharp/001 100
+/project/jamichsu/REDS/train/train_sharp/002 100
+/project/jamichsu/REDS/train/train_sharp/003 100
+/project/jamichsu/REDS/train/train_sharp/004 100

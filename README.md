@@ -9,7 +9,7 @@
 ### TODO
 
 - ✅ Release inference code and model weights  
-- ⬜ Release training code 
+- ✅ Release training code 
 
 ## Abstract
 Diffusion-based video super-resolution (VSR) methods achieve strong perceptual quality but remain impractical for latency-sensitive settings due to reliance on future frames and expensive multi-step denoising. We propose Stream-DiffVSR, a causally conditioned diffusion framework for efficient online VSR. Operating strictly on past frames, it combines a four-step distilled denoiser for fast inference, an Auto-regressive Temporal Guidance (ARTG) module injecting motion-aligned cues during latent denoising, and a lightweight temporal-aware decoder with a Temporal Processor Module (TPM) enhancing detail and temporal coherence. Stream-DiffVSR processes 720p frames in 0.328 seconds on an RTX4090 GPU and significantly outperforms prior diffusion-based methods. Compared with the online SOTA TMP~\citep{zhang2024tmp}, it boosts perceptual quality (LPIPS +0.095) while reducing latency by over 130X. Stream-DiffVSR achieves the lowest latency reported for diffusion-based VSR reducing initial delay from over 4600 seconds to 0.328 seconds, thereby making it the first diffusion VSR method suitable for low-latency online deployment.
@@ -91,6 +91,34 @@ python inference.py \
 ```
 
 When executing the TensorRT command for the first time with a new output resolution, you may observe that the process takes an extended period to build the dedicated TensorRT engine. We kindly ask for your patience. Please note that this engine compilation is a one-time setup step for that specific resolution, essential for enabling subsequent accelerated inference at the same setting.
+
+### Training
+
+The UNet denoiser is initialized from the pretrained weights of [StableVSR](https://huggingface.co/claudiom4sir/StableVSR). The pretrained weights are automatically downloaded when running the training code, so no manual download is required.
+
+The configuration and pretrained weights for the temporal decoder are provided in `pretrained-model/taesd-x4` and are included in this repository.
+
+We sincerely thank the authors of [StableVSR](https://huggingface.co/claudiom4sir/StableVSR) and TAESD-X4 for their valuable contributions and for publicly releasing their work.
+
+#### Training Pipeline
+
+The training pipeline consists of the following three stages, which should be performed sequentially:
+
+**Step 1. Train the UNet with rollout distillation**
+
+**Step 2. Train the TPM within the temporal decoder**
+
+**Step 3. Train the ARTG with the UNet and TPM frozen**
+
+```bash
+# Step 1. Train the UNet with rollout distillation
+bash train/train_4steps_unet_rollout.sh
+
+# Step 2. Train the TPM within the temporal decoder
+bash train/train_temporal_autoencoder.sh
+
+# Step 3. Train the ARTG with the UNet and TPM frozen
+bash train/train_artg.sh
 
 ## Gradio UI (Video Upscaling)
 

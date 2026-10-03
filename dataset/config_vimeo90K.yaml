@@ -1,0 +1,31 @@
+dataset:
+  train:
+    dataroot_gt: /project2/vimeo90K/GT # path to GT (e.g., 000, 001, 002 ... )
+    dataroot_lq: /project2/vimeo90K/BIx4 # path to bicubic (e.g., 000, 001, 002 ... )
+    meta_info_file: ./dataset/Vimeo90K_train_metadata.txt
+    dataroot_flow:
+    io_backend:
+      type: disk
+    num_frame: 3
+    test_mode: False
+    interval_list: [1]
+    random_reverse: False
+    gt_size: 256
+    use_hflip: True
+    use_rot: False
+    scale: 4
+    remove_partition: True
+  test:
+    dataroot_gt: /project2/vimeo90K/GT
+    dataroot_lq: /project2/vimeo90K/BIx4
+    meta_info_file: /project2/vimeo90K/sep_testlist.txt
+    io_backend:
+      type: disk
+    num_frame: 3
+    test_mode: True
+    interval_list: [1]
+    random_reverse: False
+    gt_size: 256
+    use_hflip: False
+    use_rot: False
+    scale: 4

@@ -1,0 +1,4 @@
+/project/jamichsu/REDS/train/train_sharp_bicubic/X4/001 100
+/project/jamichsu/REDS/train/train_sharp_bicubic/X4/002 100
+/project/jamichsu/REDS/train/train_sharp_bicubic/X4/003 100
+/project/jamichsu/REDS/train/train_sharp_bicubic/X4/004 100
