@@ -100,6 +100,20 @@ The configuration and pretrained weights for the temporal decoder are provided i
 
 We sincerely thank the authors of [StableVSR](https://huggingface.co/claudiom4sir/StableVSR) and TAESD-X4 for their valuable contributions and for publicly releasing their work.
 
+#### Dataset Preparation
+
+We use **REDS** and **Vimeo-90K** for training.
+
+- **REDS:** Download the dataset from the [official website](https://seungjunnah.github.io/Datasets/reds.html).
+- **Vimeo-90K:** Download the **Vimeo-90K Septuplet** dataset from the [official website](http://toflow.csail.mit.edu/).
+
+After downloading the datasets, update the corresponding dataset paths in:
+
+```
+dataset/config_reds.yaml
+dataset/config_vimeo90K.yaml
+```
+
 #### Training Pipeline
 
 The training pipeline consists of the following three stages, which should be performed sequentially:
