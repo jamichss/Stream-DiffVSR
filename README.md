@@ -3,7 +3,8 @@
 **Authors:** Hau-Shiang Shiu, Chin-Yang Lin, Zhixiang Wang, Chi-Wei Hsiao, Po-Fan Yu, Yu-Chih Chen, Yu-Lun Liu
 
 <a href='https://jamichss.github.io/stream-diffvsr-project-page/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp;
-<a href="https://huggingface.co/Jamichsu/Stream-DiffVSR"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model%20(v1)-blue"></a> &nbsp;
+<a href="https://huggingface.co/Jamichsu/Stream-DiffVSR"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model%20(Bicubic)-blue"></a> &nbsp;
+<a href="https://huggingface.co/Jamichsu/Stream-DiffVSR-Mix-Degradation"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model%20(MixDegradation)-blue"></a> &nbsp;
 <a href="https://arxiv.org/abs/2512.23709"><img src="https://img.shields.io/badge/arXiv-2510.12747-b31b1b.svg"></a>
 
 ### TODO
@@ -53,7 +54,9 @@ pip install -r requirements-app.txt
 This installs the Gradio UI dependencies and pins a compatible `huggingface-hub` for the UI path. It is not required for CLI inference.
 
 ### Pretrained models
-Pretrained models are available [here](https://huggingface.co/Jamichsu/Stream-DiffVSR). You don't need to download them explicitly as they are fetched with inference code.
+Pretrained models are available [here(single degradation, bicubic)](https://huggingface.co/Jamichsu/Stream-DiffVSR) and [here(mixed degradation)](https://huggingface.co/Jamichsu/Stream-DiffVSR-Mix-Degradation). You don't need to download them explicitly as they are fetched with inference code. We currently provide two pretrained checkpoints for inference:
+- [Single degradation](https://huggingface.co/Jamichsu/Stream-DiffVSR): Trained on REDS using the official REDS degradation setting (bicubic downsampling).
+- [Mixed degradation](https://huggingface.co/Jamichsu/Stream-DiffVSR-Mix-Degradation): Trained on REDS with multiple degradation types generated using [DOVE's](https://github.com/zhengchen1999/DOVE) degradation pipeline. We thank the authors for open-sourcing their work.
 ### Inference
 You can run the inference directly using the following command. No manual download of checkpoints is required, as the inference script will automatically fetch the necessary files.
 ```
