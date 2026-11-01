@@ -57,6 +57,8 @@ This installs the Gradio UI dependencies and pins a compatible `huggingface-hub`
 Pretrained models are available [here(single degradation, bicubic)](https://huggingface.co/Jamichsu/Stream-DiffVSR) and [here(mixed degradation)](https://huggingface.co/Jamichsu/Stream-DiffVSR-Mix-Degradation). You don't need to download them explicitly as they are fetched with inference code. We currently provide two pretrained checkpoints for inference:
 - [Single degradation](https://huggingface.co/Jamichsu/Stream-DiffVSR): Trained on REDS using the official REDS degradation setting (bicubic downsampling).
 - [Mixed degradation](https://huggingface.co/Jamichsu/Stream-DiffVSR-Mix-Degradation): Trained on REDS with multiple degradation types generated using [DOVE's](https://github.com/zhengchen1999/DOVE) degradation pipeline. We thank the authors for open-sourcing their work.
+
+By default, the inference code downloads the single-degradation checkpoint. For mixed-degradation inference, please specify the corresponding checkpoint.
 ### Inference
 You can run the inference directly using the following command. No manual download of checkpoints is required, as the inference script will automatically fetch the necessary files.
 ```
